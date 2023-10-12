@@ -1,0 +1,42 @@
+---
+
+# -------------------------------------------------------------------------------------------------
+# Job Name
+# -------------------------------------------------------------------------------------------------
+name: build
+
+
+# -------------------------------------------------------------------------------------------------
+# When to run
+# -------------------------------------------------------------------------------------------------
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/action_pull_request.yml'
+      - '.github/workflows/params.yml'
+      - 'Dockerfiles/**'
+      - 'tests/**'
+      - 'Makefile'
+      - '!**.md'
+
+
+jobs:
+
+  # (1/2) Determine repository params
+  params:
+    uses: ./.github/workflows/params.yml
+    # Only run for forks (contributor)
+    if: github.event.pull_request.head.repo.fork
+
+  # (2/2) Build
+  docker:
+    needs: [params]
+    uses: linuxeye/github-actions/.github/workflows/docker-name-version-flavour-arch.yml@main
+    with:
+      enabled: true
+      can_deploy: false
+      matrix: ${{ needs.params.outputs.matrix }}
+      refs: ${{ needs.params.outputs.refs }}
+    secrets:
+      dockerhub_username: ""
+      dockerhub_password: ""
