@@ -259,12 +259,16 @@ ARG NGINX_BUILD_CONFIG="\
             --with-stream_realip_module \
             --with-stream_ssl_module \
             --with-stream_ssl_preread_module \
+            --with-http_image_filter_module=dynamic \
+            --with-http_xslt_module=dynamic \
             `# CUSTOM MODULES` \
             --add-module=/headers-more-nginx-module-${VER_OPENRESTY_HEADERS} \
             --add-module=/lua-nginx-module-${VER_LUA_NGINX_MODULE} \
             --add-module=/lua-upstream-nginx-module-${VER_LUA_UPSTREAM} \
             --add-module=/ngx_devel_kit-${VER_NGX_DEVEL_KIT} \
-            --add-module=/ngx_http_geoip2_module-${VER_GEOIP} \
+            --add-dynamic-module=/ngx_http_geoip2_module-${VER_GEOIP} \
+            --add-dynamic-module=/ngx_brotli \
+            --add-dynamic-module=/ngx-fancyindex \
             --add-module=/njs-${VER_NJS}/nginx \
             --add-module=/set-misc-nginx-module-${VER_MISC_NGINX} \
             --add-module=/stream-lua-nginx-module-${VER_OPENRESTY_STREAMLUA} \
@@ -309,6 +313,7 @@ ARG NGINX_BUILD_DEPS="\
         openssl-dev \
         pcre-dev \
         zlib-dev \
+        gd-dev \
 # OPENRESTY PATCHES
         git \
 "
@@ -390,6 +395,8 @@ ARG PKG_DEPS="\
         wget \
         shadow \
         zlib-dev \
+        gd \
+        libxslt \
 "
 ENV PKG_DEPS=$PKG_DEPS
 
@@ -398,6 +405,7 @@ COPY --from=builder --chown=1000:1000 /usr/local/lib /usr/local/lib
 COPY --from=builder --chown=1000:1000 /usr/local/share/lua /usr/local/share/lua
 COPY --from=builder --chown=1000:1000 /usr/sbin/nginx /usr/sbin/nginx
 COPY --from=builder --chown=1000:1000 /usr/sbin/nginx-debug /usr/sbin/nginx-debug
+COPY --from=builder --chown=1000:1000 /usr/lib/nginx/modules /usr/lib/nginx/modules
 COPY --from=builder --chown=1000:1000 /var/cache/nginx /var/cache/nginx
 # luajit
 COPY --from=builder --chown=1000:1000 /usr/local/lib/libluajit* /usr/local/lib/

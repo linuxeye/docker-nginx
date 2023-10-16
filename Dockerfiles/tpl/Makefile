@@ -68,7 +68,7 @@ core:
 
 deps: dep-ngx_devel_kit dep-njs dep-geoip2 dep-luajit dep-lua-nginx dep-lua-resty-core dep-lua-resty-lrucache
 ifeq ($(EXTENDED_IMAGE), YES)
-	$(MAKE) dep-headers-more-nginx-module dep-lua-resty-cookie dep-lua-openresty-dns dep-lua-openresty-memcached dep-lua-openresty-mysql dep-lua-openresty-redis dep-lua-openresty-shell dep-lua-openresty-tablepool dep-lua-openresty-signal dep-lua-resty-upstream-healthcheck dep-lua-openresty-websocket dep-lua-upstream-nginx-module dep-nginx-lua-prometheus dep-stream-lua-nginx-module dep-lua-openresty-misc
+	$(MAKE) dep-headers-more-nginx-module dep-lua-resty-cookie dep-lua-openresty-dns dep-lua-openresty-memcached dep-lua-openresty-mysql dep-lua-openresty-redis dep-lua-openresty-shell dep-lua-openresty-tablepool dep-lua-openresty-signal dep-lua-resty-upstream-healthcheck dep-lua-openresty-websocket dep-lua-upstream-nginx-module dep-nginx-lua-prometheus dep-stream-lua-nginx-module dep-lua-openresty-misc dep-ngx_brotli dep-ngx-fancyindex
 endif
 
 # NGX Devel Kit
@@ -245,6 +245,14 @@ dep-nginx-lua-prometheus:
 dep-stream-lua-nginx-module:
 	curl -sLo /stream-lua-nginx-module.zip https://github.com/openresty/stream-lua-nginx-module/archive/v${VER_OPENRESTY_STREAMLUA}.zip
 	unzip -d / /stream-lua-nginx-module.zip
+
+dep-ngx_brotli:
+	git clone https://github.com/google/ngx_brotli.git /ngx_brotli; \
+	cd /ngx_brotli; \
+	git submodule update --init
+
+dep-ngx-fancyindex:
+	git clone https://github.com/aperezdc/ngx-fancyindex.git /ngx-fancyindex
 
 # ##############################################################################
 # LUAROCKS
