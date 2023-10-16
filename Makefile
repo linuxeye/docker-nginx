@@ -27,7 +27,7 @@ TAG        = latest
 
 # Makefile.docker overwrites
 NAME       = Nginx
-VERSION    = mainline 
+VERSION    = mainline
 IMAGE      = bypanel/nginx
 FLAVOUR    = latest
 DIR        = Dockerfiles
