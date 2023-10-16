@@ -387,7 +387,7 @@ FROM base
 # wget is required due to https://github.com/luarocks/luarocks/issues/952
 ARG PKG_DEPS="\
         curl \
-        libmaxminddb-dev \
+        libmaxminddb \
         libxml2-dev \
         openssl-dev \
         pcre-dev \
