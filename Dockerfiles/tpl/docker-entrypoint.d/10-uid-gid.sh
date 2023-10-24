@@ -38,7 +38,6 @@ set_uid() {
 	log "info" "Setting uid to ${uid} (user: ${username})"
 	run "usermod -u ${uid} ${username}"
 	run "id ${username}"
-	run "sed -i 's@^user.*;@user ${username};@' /etc/nginx/nginx.conf"
 }
 
 
