@@ -51,7 +51,7 @@ core:
 		/var/cache/nginx/fastcgi_temp \
 		/var/cache/nginx/uwsgi_temp \
 		/var/cache/nginx/scgi_temp
-	make openresty-patches
+	#make openresty-patches
 	cd /nginx-${VER_NGINX}; \
 	./configure ${NGINX_BUILD_CONFIG} --with-cc-opt="$(NGX_CFLAGS)" --with-ld-opt="$(NGX_LDOPT)" --with-debug \
 	&& $(MAKE) build \
