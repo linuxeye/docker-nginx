@@ -33,7 +33,7 @@ FLAVOUR    = latest
 DIR        = Dockerfiles
 FILE       = Dockerfile.$(FLAVOUR)
 ifeq ($(strip $(VERSION)),mainline)
-	VERSION = 1.25.2
+	VERSION = 1.25.3
 	DOCKER_TAG = $(VERSION)
 else
 	VERSION = 1.24.0
