@@ -183,11 +183,6 @@ ENV VER_MISC_NGINX=$VER_MISC_NGINX
 ARG VER_OPENRESTY_STREAMLUA=0.0.13
 ENV VER_OPENRESTY_STREAMLUA=$VER_OPENRESTY_STREAMLUA
 
-# ngx_cache_purge
-# https://github.com/FRiCKLE/ngx_cache_purge
-ARG VER_NGX_CACHE_PURGE=2.3
-ENV VER_NGX_CACHE_PURGE=$VER_NGX_CACHE_PURGE
-
 ################################################################################
 
 # Replicate same official env variable
@@ -274,7 +269,7 @@ ARG NGINX_BUILD_CONFIG="\
             --add-dynamic-module=/ngx_http_geoip2_module-${VER_GEOIP} \
             --add-dynamic-module=/ngx_brotli \
             --add-dynamic-module=/ngx-fancyindex \
-            --add-dynamic-module=/ngx_cache_purge-${VER_NGX_CACHE_PURGE} \
+            --add-dynamic-module=/ngx_cache_purge \
             --add-module=/njs-${VER_NJS}/nginx \
             --add-module=/set-misc-nginx-module-${VER_MISC_NGINX} \
             --add-module=/stream-lua-nginx-module-${VER_OPENRESTY_STREAMLUA} \

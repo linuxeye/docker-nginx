@@ -255,8 +255,7 @@ dep-ngx-fancyindex:
 	git clone https://github.com/aperezdc/ngx-fancyindex.git /ngx-fancyindex
 
 dep-ngx_cache_purge:
-	curl -sLo /ngx_cache_purge.tar.gz https://github.com/FRiCKLE/ngx_cache_purge/archive/${VER_NGX_CACHE_PURGE}.tar.gz
-	tar -C / -xvzf /ngx_cache_purge.tar.gz
+	git clone https://github.com/Danrancan/ngx_cache_purge_dynamic.git /ngx_cache_purge 
 
 # ##############################################################################
 # LUAROCKS
