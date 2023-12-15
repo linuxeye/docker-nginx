@@ -104,6 +104,8 @@ dep-luajit:
 dep-lua-cjson:
 	curl -sLo /lua-cjson.tar.gz https://github.com/openresty/lua-cjson/archive/${VER_LUA_CJSON}.tar.gz
 	tar -C / -xvzf /lua-cjson.tar.gz
+	rm -rf /usr/local/share/lua/5.1
+	ln -s /usr/local/lib/lua /usr/local/share/lua/5.1
 	cd /lua-cjson-${VER_LUA_CJSON} \
 	sed -i 's@^LUA_INCLUDE_DIR.*@&/luajit-2.1@' Makefile \
 	&& $(MAKE) \
@@ -265,7 +267,7 @@ dep-ngx-fancyindex:
 	git clone https://github.com/aperezdc/ngx-fancyindex.git /ngx-fancyindex
 
 dep-ngx_cache_purge:
-	git clone https://github.com/Danrancan/ngx_cache_purge_dynamic.git /ngx_cache_purge 
+	git clone https://github.com/Danrancan/ngx_cache_purge_dynamic.git /ngx_cache_purge
 
 # ##############################################################################
 # LUAROCKS
