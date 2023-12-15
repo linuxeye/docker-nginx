@@ -44,12 +44,12 @@ ENV VER_NGINX=$VERSION
 # ngx_devel_kit
 # https://github.com/vision5/ngx_devel_kit
 # The NDK is now considered to be stable.
-ARG VER_NGX_DEVEL_KIT=0.3.2
+ARG VER_NGX_DEVEL_KIT=0.3.3
 ENV VER_NGX_DEVEL_KIT=$VER_NGX_DEVEL_KIT
 
 # njs
 # https://github.com/nginx/njs
-ARG VER_NJS=0.8.1
+ARG VER_NJS=0.8.2
 ENV VER_NJS=$VER_NJS
 
 # geoip2
@@ -68,7 +68,7 @@ ENV VER_GEOIP=$VER_GEOIP
 # consistently in the system. If needed to use the latest Lua version (ie >=5.4)
 # the os system package would be required, resulting in a system with multiple
 # versions available.
-ARG VER_LUAJIT=2.1-20230911
+ARG VER_LUAJIT=2.1-20231117
 ENV VER_LUAJIT=$VER_LUAJIT
 ARG LUAJIT_LIB=/usr/local/lib
 ENV LUAJIT_LIB=$LUAJIT_LIB
@@ -76,6 +76,11 @@ ARG LUAJIT_INC=/usr/local/include/luajit-2.1
 ENV LUAJIT_INC=$LUAJIT_INC
 ARG LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+
+# lua-cjson
+# https://github.com/openresty/lua-cjson
+ARG VER_LUA_CJSON=2.1.0.13
+ENV VER_LUA_CJSON=$VER_LUA_CJSON
 
 # lua-nginx-module
 # https://github.com/openresty/lua-nginx-module
@@ -104,7 +109,7 @@ ENV VER_LUAROCKS=$VER_LUAROCKS
 
 # headers-more-nginx-module
 # https://github.com/openresty/headers-more-nginx-module
-ARG VER_OPENRESTY_HEADERS=0.34
+ARG VER_OPENRESTY_HEADERS=0.36
 ENV VER_OPENRESTY_HEADERS=$VER_OPENRESTY_HEADERS
 
 # lua-resty-cookie
@@ -114,7 +119,7 @@ ENV VER_CLOUDFLARE_COOKIE=$VER_CLOUDFLARE_COOKIE
 
 # lua-resty-dns
 # https://github.com/openresty/lua-resty-dns
-ARG VER_OPENRESTY_DNS=0.22
+ARG VER_OPENRESTY_DNS=0.23
 ENV VER_OPENRESTY_DNS=$VER_OPENRESTY_DNS
 
 # lua-resty-lrucache
@@ -155,12 +160,12 @@ ENV VER_OPENRESTY_HEALTHCHECK=$VER_OPENRESTY_HEALTHCHECK
 
 # lua-resty-websocket
 # https://github.com/openresty/lua-resty-websocket
-ARG VER_OPENRESTY_WEBSOCKET=0.10
+ARG VER_OPENRESTY_WEBSOCKET=0.11
 ENV VER_OPENRESTY_WEBSOCKET=$VER_OPENRESTY_WEBSOCKET
 
 # lua-tablepool
 # https://github.com/openresty/lua-tablepool
-ARG VER_OPENRESTY_TABLEPOOL=0.02
+ARG VER_OPENRESTY_TABLEPOOL=0.03
 ENV VER_OPENRESTY_TABLEPOOL=$VER_OPENRESTY_TABLEPOOL
 
 # lua-upstream-nginx-module

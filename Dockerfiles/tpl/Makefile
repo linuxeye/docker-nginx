@@ -66,7 +66,7 @@ core:
 # DEPENDENCIES
 # ##############################################################################
 
-deps: dep-ngx_devel_kit dep-njs dep-geoip2 dep-luajit dep-lua-nginx dep-lua-resty-core dep-lua-resty-lrucache
+deps: dep-ngx_devel_kit dep-njs dep-geoip2 dep-luajit dep-lua-cjson dep-lua-resty-core dep-lua-resty-lrucache dep-lua-nginx
 ifeq ($(EXTENDED_IMAGE), YES)
 	$(MAKE) dep-headers-more-nginx-module dep-lua-resty-cookie dep-lua-openresty-dns dep-lua-openresty-memcached dep-lua-openresty-mysql dep-lua-openresty-redis dep-lua-openresty-shell dep-lua-openresty-tablepool dep-lua-openresty-signal dep-lua-resty-upstream-healthcheck dep-lua-openresty-websocket dep-lua-upstream-nginx-module dep-nginx-lua-prometheus dep-stream-lua-nginx-module dep-lua-openresty-misc dep-ngx_brotli dep-ngx-fancyindex dep-ngx_cache_purge
 endif
@@ -96,6 +96,15 @@ dep-luajit:
 	curl -sLo /luajit.tar.gz https://github.com/openresty/luajit2/archive/v${VER_LUAJIT}.tar.gz
 	tar -C / -xvzf /luajit.tar.gz
 	cd /luajit2-${VER_LUAJIT} \
+	&& $(MAKE) \
+	&& $(MAKE) install
+
+# Lua cjson Module
+# ##############################################################################
+dep-lua-cjson:
+	curl -sLo /lua-cjson.tar.gz https://github.com/openresty/lua-cjson/archive/${VER_LUA_CJSON}.tar.gz
+	tar -C / -xvzf /lua-cjson.tar.gz
+	cd /lua-cjson-${VER_LUA_CJSON} \
 	&& $(MAKE) \
 	&& $(MAKE) install
 
