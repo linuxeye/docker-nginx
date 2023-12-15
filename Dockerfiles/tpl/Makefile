@@ -105,6 +105,7 @@ dep-lua-cjson:
 	curl -sLo /lua-cjson.tar.gz https://github.com/openresty/lua-cjson/archive/${VER_LUA_CJSON}.tar.gz
 	tar -C / -xvzf /lua-cjson.tar.gz
 	cd /lua-cjson-${VER_LUA_CJSON} \
+	sed -i 's@^LUA_INCLUDE_DIR.*@&/luajit-2.1@' Makefile
 	&& $(MAKE) \
 	&& $(MAKE) install
 
