@@ -66,7 +66,7 @@ core:
 # DEPENDENCIES
 # ##############################################################################
 
-deps: dep-ngx_devel_kit dep-njs dep-geoip2 dep-luajit dep-lua-cjson dep-lua-resty-core dep-lua-resty-lrucache dep-lua-nginx
+deps: dep-ngx_devel_kit dep-njs dep-geoip2 dep-luajit dep-lua-resty-core dep-lua-resty-lrucache dep-lua-cjson dep-lua-nginx
 ifeq ($(EXTENDED_IMAGE), YES)
 	$(MAKE) dep-headers-more-nginx-module dep-lua-resty-cookie dep-lua-openresty-dns dep-lua-openresty-memcached dep-lua-openresty-mysql dep-lua-openresty-redis dep-lua-openresty-shell dep-lua-openresty-tablepool dep-lua-openresty-signal dep-lua-resty-upstream-healthcheck dep-lua-openresty-websocket dep-lua-upstream-nginx-module dep-nginx-lua-prometheus dep-stream-lua-nginx-module dep-lua-openresty-misc dep-ngx_brotli dep-ngx-fancyindex dep-ngx_cache_purge
 endif
@@ -104,10 +104,8 @@ dep-luajit:
 dep-lua-cjson:
 	curl -sLo /lua-cjson.tar.gz https://github.com/openresty/lua-cjson/archive/${VER_LUA_CJSON}.tar.gz
 	tar -C / -xvzf /lua-cjson.tar.gz
-	rm -rf /usr/local/share/lua/5.1
-	ln -s /usr/local/lib/lua /usr/local/share/lua/5.1
 	cd /lua-cjson-${VER_LUA_CJSON} \
-	sed -i 's@^LUA_INCLUDE_DIR.*@&/luajit-2.1@' Makefile \
+	&& sed -i 's@^LUA_INCLUDE_DIR.*@&/luajit-2.1@' Makefile \
 	&& $(MAKE) \
 	&& $(MAKE) install
 

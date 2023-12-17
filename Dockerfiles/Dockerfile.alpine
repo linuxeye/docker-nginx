@@ -290,6 +290,7 @@ ARG BUILD_DEPS_BASE="\
         patch \
         pcre-dev \
         tar \
+        sed \
         zlib-dev \
 "
 ENV BUILD_DEPS_BASE=$BUILD_DEPS_BASE
