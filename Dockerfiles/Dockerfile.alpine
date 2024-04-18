@@ -36,7 +36,7 @@ ENV VCS_REF=$VCS_REF
 # nginx
 # https://github.com/nginx/nginx/releases
 ARG VERSION
-ENV VER_NGINX=$VERSION
+ENV VERSION=$VERSION
 
 # NGINX MODULES
 ################################################################################
@@ -191,7 +191,7 @@ ENV VER_OPENRESTY_STREAMLUA=$VER_OPENRESTY_STREAMLUA
 ################################################################################
 
 # Replicate same official env variable
-ENV NGINX_VERSION   $VER_NGINX
+ENV NGINX_VERSION   $VERSION
 ENV NJS_VERSION     $VER_NJS
 ENV PKG_RELEASE     1~$DISTRO_VER
 
@@ -354,21 +354,21 @@ FROM base
 # http://label-schema.org/rc1/
 #LABEL maintainer="Fabio Cicerchia <info@fabiocicerchia.it>" \
 #    org.label-schema.build-date="${BUILD_DATE}" \
-#    org.label-schema.description="Nginx ${VER_NGINX} with Lua support based on alpine (${ARCH}) 3.18.4." \
-#    org.label-schema.docker.cmd="docker run -p 80:80 -d ${DOCKER_IMAGE}:${VER_NGINX}-alpine3.18.4" \
+#    org.label-schema.description="Nginx ${VERSION} with Lua support based on alpine (${ARCH}) 3.18.4." \
+#    org.label-schema.docker.cmd="docker run -p 80:80 -d ${DOCKER_IMAGE}:${VERSION}-alpine3.18.4" \
 #    org.label-schema.name="${DOCKER_IMAGE}" \
 #    org.label-schema.schema-version="1.0" \
 #    org.label-schema.url="https://github.com/${DOCKER_IMAGE}" \
 #    org.label-schema.vcs-ref=$VCS_REF \
 #    org.label-schema.vcs-url="https://github.com/${DOCKER_IMAGE}" \
-#    org.label-schema.version="${VER_NGINX}-alpine3.18.4" \
+#    org.label-schema.version="${VERSION}-alpine3.18.4" \
 #    image.target.platform="${TARGETPLATFORM}" \
 #    image.target.os="${TARGETOS}" \
 #    image.target.arch="${ARCH}" \
 #    versions.os="3.18.4" \
 #    versions.luajit2="${VER_LUAJIT}" \
 #    versions.luarocks="${VER_LUAROCKS}" \
-#    versions.nginx="${VER_NGINX}" \
+#    versions.nginx="${VERSION}" \
 #    versions.ngx_devel_kit="${VER_NGX_DEVEL_KIT}" \
 #    versions.njs="${VER_NJS}" \
 #    versions.geoip="${VER_GEOIP}" \

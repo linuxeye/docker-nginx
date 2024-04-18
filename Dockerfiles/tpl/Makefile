@@ -12,28 +12,28 @@ NPROC := $(shell nproc)
 
 # TODO: Find a better way to fallback when openresty is behind the nginx latest
 # version and no patch is available.
-FALLBACK_VER_NGINX=1.23.0
+FALLBACK_VERSION=1.23.0
 
 # ##############################################################################
 # CORE
 # ##############################################################################
 
 openresty-patches:
-	mkdir -p /nginx-${VER_NGINX}/patches
+	mkdir -p /nginx-${VERSION}/patches
 	git clone https://github.com/openresty/openresty.git; \
-	PATCH_VER=${VER_NGINX}; \
-	if [ "$(ls -1 openresty/patches/nginx-${VER_NGINX}-*.patch 2>/dev/null)" = "" ]; then \
-		PATCH_VER=${FALLBACK_VER_NGINX}; \
+	PATCH_VER=${VERSION}; \
+	if [ "$(ls -1 openresty/patches/nginx-${VERSION}-*.patch 2>/dev/null)" = "" ]; then \
+		PATCH_VER=${FALLBACK_VERSION}; \
 	fi; \
 	for patch_file in openresty/patches/nginx-$${PATCH_VER}-*.patch; do \
 		echo "copying openresty patch $${patch_file}"; \
-		cp "$${patch_file}" /nginx-${VER_NGINX}/patches/; \
+		cp "$${patch_file}" /nginx-${VERSION}/patches/; \
 	done; \
 	for patch_file in /patches/*.patch; do \
 		echo "overriding openresty patch $${patch_file}"; \
-		cp "$${patch_file}" /nginx-${VER_NGINX}/patches/; \
+		cp "$${patch_file}" /nginx-${VERSION}/patches/; \
 	done; \
-	cd /nginx-${VER_NGINX}; \
+	cd /nginx-${VERSION}; \
 	for patch_file in patches/*.patch; do \
 		echo "applying openresty patch $${patch_file}"; \
 		patch -p1 < "$${patch_file}"; \
@@ -44,7 +44,7 @@ core:
 # ##############################################################################
 # we're on an architecture upstream doesn't officially build for
 # let's build binaries from the published packaging sources
-	curl -sLo /nginx.tar.gz https://nginx.org/download/nginx-${VER_NGINX}.tar.gz
+	curl -sLo /nginx.tar.gz https://nginx.org/download/nginx-${VERSION}.tar.gz
 	tar -C / -xvzf /nginx.tar.gz
 	mkdir -p /var/cache/nginx/client_temp \
 		/var/cache/nginx/proxy_temp \
@@ -52,7 +52,7 @@ core:
 		/var/cache/nginx/uwsgi_temp \
 		/var/cache/nginx/scgi_temp
 	#make openresty-patches
-	cd /nginx-${VER_NGINX}; \
+	cd /nginx-${VERSION}; \
 	./configure ${NGINX_BUILD_CONFIG} --with-cc-opt="$(NGX_CFLAGS)" --with-ld-opt="$(NGX_LDOPT)" --with-debug \
 	&& $(MAKE) build \
 	&& mv objs/nginx objs/nginx-debug \
