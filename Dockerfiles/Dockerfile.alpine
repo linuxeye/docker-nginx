@@ -49,7 +49,7 @@ ENV VER_NGX_DEVEL_KIT=$VER_NGX_DEVEL_KIT
 
 # njs
 # https://github.com/nginx/njs
-ARG VER_NJS=0.8.3
+ARG VER_NJS=0.8.4
 ENV VER_NJS=$VER_NJS
 
 # geoip2
@@ -68,7 +68,7 @@ ENV VER_GEOIP=$VER_GEOIP
 # consistently in the system. If needed to use the latest Lua version (ie >=5.4)
 # the os system package would be required, resulting in a system with multiple
 # versions available.
-ARG VER_LUAJIT=2.1-20231117
+ARG VER_LUAJIT=2.1-20240314
 ENV VER_LUAJIT=$VER_LUAJIT
 ARG LUAJIT_LIB=/usr/local/lib
 ENV LUAJIT_LIB=$LUAJIT_LIB
@@ -101,7 +101,7 @@ ENV LUA_LIB_DIR=$LUA_LIB_DIR
 
 # lua-rocks
 # https://luarocks.github.io/luarocks/releases/
-ARG VER_LUAROCKS=3.9.2
+ARG VER_LUAROCKS=3.11.0
 ENV VER_LUAROCKS=$VER_LUAROCKS
 
 # LUA ADDONS
