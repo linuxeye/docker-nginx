@@ -27,7 +27,7 @@ TAG        = latest
 
 # Makefile.docker overwrites
 NAME       = Nginx
-VERSION    = 1.24.0 
+VERSION    = 1.24.0
 IMAGE      = bypanel/nginx
 FLAVOUR    = latest
 DIR        = Dockerfiles
@@ -58,11 +58,11 @@ help:
 #  Docker Targets
 # -------------------------------------------------------------------------------------------------
 .PHONY: build
-build: ARGS=--build-arg ARCH=$(ARCH)
+build: ARGS=--build-arg ARCH=$(ARCH) --build-arg VERSION=$(VERSION)
 build: docker-arch-build
 
 .PHONY: rebuild
-rebuild: ARGS=--build-arg ARCH=$(ARCH)
+rebuild: ARGS=--build-arg ARCH=$(ARCH) --build-arg VERSION=$(VERSION)
 rebuild: docker-arch-rebuild
 
 .PHONY: push
