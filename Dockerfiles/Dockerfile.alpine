@@ -35,7 +35,7 @@ ENV VCS_REF=$VCS_REF
 
 # nginx
 # https://github.com/nginx/nginx/releases
-ARG VERSION
+ARG VERSION=
 ENV VERSION=$VERSION
 
 # NGINX MODULES
@@ -343,7 +343,7 @@ COPY tpl/Makefile Makefile
 COPY tpl/patches patches
 
 RUN make deps \
-    && make core VERSION=$VERSION \
+    && make core \
     && make luarocks
 
 ##########################################
