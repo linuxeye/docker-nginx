@@ -343,7 +343,7 @@ COPY tpl/Makefile Makefile
 COPY tpl/patches patches
 
 RUN make deps \
-    && make core \
+    && make core VERSION=$VERSION \
     && make luarocks
 
 ##########################################
