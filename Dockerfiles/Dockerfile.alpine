@@ -427,7 +427,7 @@ COPY --from=builder --chown=1000:1000 /usr/local/bin/luarocks* /usr/local/bin/
 COPY --from=builder --chown=1000:1000 /usr/local/etc/luarocks /usr/local/etc/luarocks
 
 COPY --chown=1000:1000 tpl/docker-entrypoint.d /docker-entrypoint.d
-COPY --chown=1000:1000 tpl/default.conf /etc/nginx/conf.d/default.conf
+COPY --chown=1000:1000 tpl/0.default.conf /etc/nginx/conf.d/0.default.conf
 COPY --chown=1000:1000 tpl/docker-entrypoint.sh /
 COPY --chown=1000:1000 tpl/nginx.conf /etc/nginx/nginx.conf
 
