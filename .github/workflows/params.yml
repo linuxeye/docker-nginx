@@ -14,7 +14,7 @@ env:
     [
       {
         "NAME":    "Nginx",
-        "VERSION": ["1.26.1", "1.27.0"],
+        "VERSION": ["1.26.2", "1.27.1"],
         "FLAVOUR": ["latest"],
         "ARCH":    ["linux/amd64", "linux/arm64"]
       }
