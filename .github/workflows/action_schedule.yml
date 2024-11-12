@@ -27,6 +27,7 @@ jobs:
     with:
       enabled: true
       can_deploy: true
+      can_registry: true
       matrix: ${{ needs.params.outputs.matrix }}
       refs: ${{ needs.params.outputs.refs }}
     secrets:

@@ -75,5 +75,6 @@ set_timezone "${TIMEZONE}"
 ### Fix directory/file permissions (in case it is mounted)
 ###
 fix_perm "/var/cache/nginx" "1"
+fix_perm "/var/log/nginx" "0"
 
 exec "$@"
