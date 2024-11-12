@@ -31,7 +31,6 @@ jobs:
     uses: linuxeye/github-actions/.github/workflows/docker-name-version-flavour-arch.yml@main
     with:
       enabled: true
-      can_registry: true
       can_deploy: ${{ github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/') || startsWith(github.ref, 'refs/heads/release-') }}
       matrix: ${{ needs.params.outputs.matrix }}
       refs: ${{ needs.params.outputs.refs }}
