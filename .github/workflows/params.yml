@@ -46,11 +46,12 @@ jobs:
       - name: "[Set-Output] Matrix"
         id: set-matrix
         run: |
-          echo "::set-output name=matrix::$( echo '${{ env.MATRIX }}' | jq -M -c )"
+          MATRIX="$( echo '${{ env.MATRIX }}' | jq -M -c )"
+          echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
 
       - name: "[Set-Output] Matrix 'Refs' (main branch and latest tag)"
         id: set-refs
-        uses: cytopia/git-ref-matrix-action@v0.1.13
+        uses: linuxeye/git-ref-matrix-action@master
         with:
           repository_default_branch: main
           branches: main
