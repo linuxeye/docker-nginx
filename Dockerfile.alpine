@@ -357,6 +357,20 @@ ENV NGINX_BUILD_DEPS=$NGINX_BUILD_DEPS
 ####################################
 FROM base AS builder
 
+RUN if [ -z "$ARCH" ]; then \
+        ARCH_VALUE=$(uname -m); \
+        if [ "$ARCH_VALUE" = "x86_64" ]; then \
+            ARCH="linux/amd64"; \
+        elif [ "$ARCH_VALUE" = "aarch64" ]; then \
+            ARCH="linux/arm64"; \
+        else \
+            echo "Unsupported architecture: $ARCH_VALUE"; \
+            exit 1; \
+        fi; \
+        echo "Building for architecture: $ARCH"; \
+    fi && \
+    ENV ARCH=$ARCH
+
 # hadolint ignore=SC2086
 RUN set -eux \
     && eval BUILD_DEPS="\$$(echo BUILD_DEPS_${ARCH##*/} | tr '[:lower:]' '[:upper:]')" \
