@@ -35,8 +35,8 @@ ENV VCS_REF=$VCS_REF
 
 # nginx
 # https://github.com/nginx/nginx/releases
-ARG VERSION=
-ENV VERSION=$VERSION
+ARG VER_NGINX=1.26.3
+ENV VER_NGINX=$VER_NGINX
 
 # NGINX MODULES
 ################################################################################
@@ -216,7 +216,7 @@ ENV VER_OPENRESTY_STRING=$VER_OPENRESTY_STRING
 ################################################################################
 
 # Replicate same official env variable
-ENV NGINX_VERSION   $VERSION
+ENV NGINX_VERSION   $VER_NGINX
 ENV NJS_VERSION     $VER_NJS
 ENV PKG_RELEASE     1~$DISTRO_VER
 

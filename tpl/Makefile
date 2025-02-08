@@ -4,7 +4,7 @@
 # |__|__|___  ||__||__|__|__.__|      |__||_____|___._|
 #       |_____|
 #
-# Copyright (c) 2023 Fabio Cicerchia. https://fabiocicerchia.it. MIT License
+# Copyright (c) 2024 Fabio Cicerchia. https://fabiocicerchia.it. MIT License
 # Repo: https://github.com/fabiocicerchia/nginx-lua
 
 EXTENDED_IMAGE=YES
@@ -12,28 +12,28 @@ NPROC := $(shell nproc)
 
 # TODO: Find a better way to fallback when openresty is behind the nginx latest
 # version and no patch is available.
-FALLBACK_VERSION=1.23.0
+FALLBACK_VER_NGINX=1.23.0
 
 # ##############################################################################
 # CORE
 # ##############################################################################
 
 openresty-patches:
-	mkdir -p /nginx-${VERSION}/patches
+	mkdir -p /nginx-${VER_NGINX}/patches
 	git clone https://github.com/openresty/openresty.git; \
-	PATCH_VER=${VERSION}; \
-	if [ "$(ls -1 openresty/patches/nginx-${VERSION}-*.patch 2>/dev/null)" = "" ]; then \
-		PATCH_VER=${FALLBACK_VERSION}; \
+	PATCH_VER=${VER_NGINX}; \
+	if [ "$(ls -1 openresty/patches/nginx-${VER_NGINX}-*.patch 2>/dev/null)" = "" ]; then \
+		PATCH_VER=${FALLBACK_VER_NGINX}; \
 	fi; \
 	for patch_file in openresty/patches/nginx-$${PATCH_VER}-*.patch; do \
 		echo "copying openresty patch $${patch_file}"; \
-		cp "$${patch_file}" /nginx-${VERSION}/patches/; \
+		cp "$${patch_file}" /nginx-${VER_NGINX}/patches/; \
 	done; \
 	for patch_file in /patches/*.patch; do \
 		echo "overriding openresty patch $${patch_file}"; \
-		cp "$${patch_file}" /nginx-${VERSION}/patches/; \
+		cp "$${patch_file}" /nginx-${VER_NGINX}/patches/; \
 	done; \
-	cd /nginx-${VERSION}; \
+	cd /nginx-${VER_NGINX}; \
 	for patch_file in patches/*.patch; do \
 		echo "applying openresty patch $${patch_file}"; \
 		patch -p1 < "$${patch_file}"; \
@@ -44,15 +44,15 @@ core:
 # ##############################################################################
 # we're on an architecture upstream doesn't officially build for
 # let's build binaries from the published packaging sources
-	curl -sLo /nginx.tar.gz https://nginx.org/download/nginx-${VERSION}.tar.gz
+	curl -sLo /nginx.tar.gz https://nginx.org/download/nginx-${VER_NGINX}.tar.gz
 	tar -C / -xvzf /nginx.tar.gz
 	mkdir -p /var/cache/nginx/client_temp \
 		/var/cache/nginx/proxy_temp \
 		/var/cache/nginx/fastcgi_temp \
 		/var/cache/nginx/uwsgi_temp \
 		/var/cache/nginx/scgi_temp
-	#make openresty-patches
-	cd /nginx-${VERSION}; \
+	make openresty-patches
+	cd /nginx-${VER_NGINX}; \
 	./configure ${NGINX_BUILD_CONFIG} --with-cc-opt="$(NGX_CFLAGS)" --with-ld-opt="$(NGX_LDOPT)" --with-debug \
 	&& $(MAKE) build \
 	&& mv objs/nginx objs/nginx-debug \
@@ -66,9 +66,16 @@ core:
 # DEPENDENCIES
 # ##############################################################################
 
-deps: dep-ngx_devel_kit dep-njs dep-geoip2 dep-luajit dep-lua-resty-core dep-lua-resty-lrucache dep-lua-cjson dep-lua-nginx
+deps: dep-ngx_devel_kit dep-njs dep-geoip2 dep-luajit dep-lua-nginx dep-lua-resty-core dep-lua-resty-lrucache
 ifeq ($(EXTENDED_IMAGE), YES)
-	$(MAKE) dep-headers-more-nginx-module dep-lua-resty-cookie dep-lua-openresty-dns dep-lua-openresty-memcached dep-lua-openresty-mysql dep-lua-openresty-redis dep-lua-openresty-shell dep-lua-openresty-tablepool dep-lua-openresty-signal dep-lua-resty-upstream-healthcheck dep-lua-openresty-websocket dep-lua-upstream-nginx-module dep-nginx-lua-prometheus dep-stream-lua-nginx-module dep-lua-openresty-misc dep-ngx_brotli dep-ngx-fancyindex dep-ngx_cache_purge
+	$(MAKE) dep-headers-more-nginx-module dep-lua-resty-cookie dep-lua-openresty-dns \
+		dep-lua-openresty-memcached dep-lua-openresty-mysql dep-lua-openresty-redis \
+		dep-lua-openresty-shell dep-lua-openresty-tablepool dep-lua-openresty-signal \
+		dep-lua-resty-upstream-healthcheck dep-lua-openresty-websocket \
+		dep-lua-upstream-nginx-module dep-nginx-lua-prometheus dep-stream-lua-nginx-module \
+		dep-lua-openresty-misc dep-lua-resty-limit-traffic dep-lua-resty-upload \
+		dep-lua-resty-lock dep-lua-resty-balancer dep-lua-resty-string \
+		dep-lua-cjson dep-ngx_brotli dep-ngx-fancyindex dep-ngx_cache_purge
 endif
 
 # NGX Devel Kit
@@ -96,16 +103,6 @@ dep-luajit:
 	curl -sLo /luajit.tar.gz https://github.com/openresty/luajit2/archive/v${VER_LUAJIT}.tar.gz
 	tar -C / -xvzf /luajit.tar.gz
 	cd /luajit2-${VER_LUAJIT} \
-	&& $(MAKE) \
-	&& $(MAKE) install
-
-# Lua cjson Module
-# ##############################################################################
-dep-lua-cjson:
-	curl -sLo /lua-cjson.tar.gz https://github.com/openresty/lua-cjson/archive/${VER_LUA_CJSON}.tar.gz
-	tar -C / -xvzf /lua-cjson.tar.gz
-	cd /lua-cjson-${VER_LUA_CJSON} \
-	&& sed -i 's@^LUA_INCLUDE_DIR.*@&/luajit-2.1@' Makefile \
 	&& $(MAKE) \
 	&& $(MAKE) install
 
@@ -255,6 +252,61 @@ dep-nginx-lua-prometheus:
 dep-stream-lua-nginx-module:
 	curl -sLo /stream-lua-nginx-module.zip https://github.com/openresty/stream-lua-nginx-module/archive/${VER_OPENRESTY_STREAMLUA}.zip
 	unzip -d / /stream-lua-nginx-module.zip
+
+# OpenResty Limit Traffic
+# ##############################################################################
+dep-lua-resty-limit-traffic:
+	curl -sLo /lua-resty-limit-traffic.zip https://github.com/openresty/lua-resty-limit-traffic/archive/v${VER_OPENRESTY_LIMITTRAFFIC}.zip
+	unzip -d / /lua-resty-limit-traffic.zip
+	cd /lua-resty-limit-traffic-${VER_OPENRESTY_LIMITTRAFFIC} \
+	&& $(MAKE) \
+	&& $(MAKE) install
+
+# OpenResty Upload
+# ##############################################################################
+dep-lua-resty-upload:
+	curl -sLo /lua-resty-upload.zip https://github.com/openresty/lua-resty-upload/archive/v${VER_OPENRESTY_UPLOAD}.zip
+	unzip -d / /lua-resty-upload.zip
+	cd /lua-resty-upload-${VER_OPENRESTY_UPLOAD} \
+	&& $(MAKE) \
+	&& $(MAKE) install
+
+# OpenResty Lock
+# ##############################################################################
+dep-lua-resty-lock:
+	curl -sLo /lua-resty-lock.zip https://github.com/openresty/lua-resty-lock/archive/v${VER_OPENRESTY_LOCK}.zip
+	unzip -d / /lua-resty-lock.zip
+	cd /lua-resty-lock-${VER_OPENRESTY_LOCK} \
+	&& $(MAKE) \
+	&& $(MAKE) install
+
+# OpenResty Balancer
+# ##############################################################################
+dep-lua-resty-balancer:
+	curl -sLo /lua-resty-balancer.zip https://github.com/openresty/lua-resty-balancer/archive/v${VER_OPENRESTY_BALANCER}.zip
+	unzip -d / /lua-resty-balancer.zip
+	cd /lua-resty-balancer-${VER_OPENRESTY_BALANCER} \
+	&& $(MAKE) \
+	&& $(MAKE) install
+
+# OpenResty String
+# ##############################################################################
+dep-lua-resty-string:
+	curl -sLo /lua-resty-string.zip https://github.com/openresty/lua-resty-string/archive/v${VER_OPENRESTY_STRING}.zip
+	unzip -d / /lua-resty-string.zip
+	cd /lua-resty-string-${VER_OPENRESTY_STRING} \
+	&& $(MAKE) \
+	&& $(MAKE) install
+
+# Lua cjson Module
+# ##############################################################################
+dep-lua-cjson:
+	curl -sLo /lua-cjson.tar.gz https://github.com/openresty/lua-cjson/archive/${VER_LUA_CJSON}.tar.gz
+	tar -C / -xvzf /lua-cjson.tar.gz
+	cd /lua-cjson-${VER_LUA_CJSON} \
+	&& sed -i 's@^LUA_INCLUDE_DIR.*@&/luajit-2.1@' Makefile \
+	&& $(MAKE) \
+	&& $(MAKE) install
 
 dep-ngx_brotli:
 	git clone https://github.com/google/ngx_brotli.git /ngx_brotli; \
