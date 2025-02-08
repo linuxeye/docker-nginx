@@ -367,9 +367,9 @@ RUN if [ -z "$ARCH" ]; then \
             echo "Unsupported architecture: $ARCH_VALUE"; \
             exit 1; \
         fi; \
-        echo "Building for architecture: $ARCH"; \
-    fi
-ENV ARCH=$ARCH
+    fi; \
+    echo "Building for architecture: $ARCH"; \
+    ENV ARCH=$ARCH
 
 # hadolint ignore=SC2086
 RUN set -eux \
