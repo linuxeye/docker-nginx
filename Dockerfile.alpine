@@ -369,7 +369,7 @@ RUN if [ -z "$ARCH" ]; then \
         fi; \
     fi; \
     echo "Building for architecture: $ARCH"; \
-    ENV ARCH=$ARCH
+    env ARCH=$ARCH
 
 # hadolint ignore=SC2086
 RUN set -eux \
