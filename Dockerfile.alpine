@@ -15,8 +15,7 @@ ARG DISTRO_VER=latest
 #############################
 FROM alpine:latest AS base
 
-ARG ARCH=
-ENV ARCH=$ARCH
+ARG TARGETARCH
 
 ENV MY_USER=bypanel
 ENV MY_GROUP=bypanel
@@ -357,22 +356,15 @@ ENV NGINX_BUILD_DEPS=$NGINX_BUILD_DEPS
 ####################################
 FROM base AS builder
 
-RUN if [ -z "$ARCH" ]; then \
-        ARCH_VALUE=$(uname -m); \
-        if [ "$ARCH_VALUE" = "x86_64" ]; then \
-            ARCH="linux/amd64"; \
-            BUILD_DEPS=$BUILD_DEPS_AMD64
-        elif [ "$ARCH_VALUE" = "aarch64" ]; then \
-            ARCH="linux/arm64"; \
-            BUILD_DEPS=$BUILD_DEPS_ARM64
-        fi; \
-    else \
-        eval BUILD_DEPS="\$$(echo BUILD_DEPS_${ARCH##*/} | tr '[:lower:]' '[:upper:]')"; \
-    fi; \
-    echo "Building for architecture: $ARCH"; \
-    env ARCH=$ARCH; \
-    apk update; \
-    apk add --no-cache $BUILD_DEPS $NGINX_BUILD_DEPS
+
+RUN case "${TARGETARCH}" in \
+    "amd64") BUILD_DEPS="${BUILD_DEPS_AMD64}" ;; \
+    "arm64") BUILD_DEPS="${BUILD_DEPS_ARM64}" ;; \
+    *) echo "Unsupported architecture: ${TARGETARCH}"; exit 1 ;; \
+    esac && \
+    echo "Building for architecture: ${TARGETARCH}" && \
+    apk update && \
+    apk add --no-cache ${BUILD_DEPS} ${NGINX_BUILD_DEPS}
 
 COPY tpl/Makefile Makefile
 COPY tpl/patches patches
