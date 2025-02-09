@@ -73,7 +73,7 @@ ARG LUAJIT_LIB=/usr/local/lib
 ENV LUAJIT_LIB=$LUAJIT_LIB
 ARG LUAJIT_INC=/usr/local/include/luajit-2.1
 ENV LUAJIT_INC=$LUAJIT_INC
-ARG LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
+ARG LD_LIBRARY_PATH=/usr/local/lib/:\$LD_LIBRARY_PATH
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
 # lua-cjson
@@ -215,9 +215,9 @@ ENV VER_OPENRESTY_STRING=$VER_OPENRESTY_STRING
 ################################################################################
 
 # Replicate same official env variable
-ENV NGINX_VERSION   $VER_NGINX
-ENV NJS_VERSION     $VER_NJS
-ENV PKG_RELEASE     1~$DISTRO_VER
+ENV NGINX_VERSION=$VER_NGINX
+ENV NJS_VERSION=$VER_NJS
+ENV PKG_RELEASE=1~$DISTRO_VER
 
 # References:
 #  - https://developers.redhat.com/blog/2018/03/21/compiler-and-linker-flags-gcc
