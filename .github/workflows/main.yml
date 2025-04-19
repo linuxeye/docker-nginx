@@ -10,8 +10,6 @@ on:
 env:
   IMAGE_NAME: "bypanel/nginx"
   DOCKERFILE_PATH: "Dockerfile.latest"
-  VER_NGINX_STABLE: "1.26.3"
-  VER_NGINX_MAINLINE: "1.27.5"
 
 jobs:
   build-and-push:
@@ -19,15 +17,17 @@ jobs:
     strategy:
       matrix:
         include:
-          - version: ${{ env.VER_NGINX_STABLE }}
+          # 硬编码稳定版配置
+          - version: "1.26.3"
             tags: |
-              ${{ env.IMAGE_NAME }}:${{ env.VER_NGINX_STABLE }}
-              ${{ env.IMAGE_NAME }}:stable
-              ${{ env.IMAGE_NAME }}:latest
-          - version: ${{ env.VER_NGINX_MAINLINE }}
+              bypanel/nginx:1.26.3
+              bypanel/nginx:stable
+              bypanel/nginx:latest
+          # 硬编码主线版配置
+          - version: "1.27.5"
             tags: |
-              ${{ env.IMAGE_NAME }}:${{ env.VER_NGINX_MAINLINE }}
-              ${{ env.IMAGE_NAME }}:mainline
+              bypanel/nginx:1.27.5
+              bypanel/nginx:mainline
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
