@@ -18,9 +18,9 @@ jobs:
       matrix:
         include:
           # 硬编码稳定版配置
-          - version: "1.26.3"
+          - version: "1.28.0"
             tags: |
-              bypanel/nginx:1.26.3
+              bypanel/nginx:1.28.0
               bypanel/nginx:stable
               bypanel/nginx:latest
           # 硬编码主线版配置
