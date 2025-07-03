@@ -24,9 +24,9 @@ jobs:
               bypanel/nginx:stable
               bypanel/nginx:latest
           # 硬编码主线版配置
-          - version: "1.27.5"
+          - version: "1.29.0"
             tags: |
-              bypanel/nginx:1.27.5
+              bypanel/nginx:1.29.0
               bypanel/nginx:mainline
     steps:
       - name: Checkout code
