@@ -14,7 +14,7 @@ ARG DISTRO_VER=latest
 #############################
 # Settings Common Variables #
 #############################
-FROM $DISTRO:$DISTRO_VER AS base
+FROM alpine:latest AS base
 
 ENV MY_USER=bypanel
 ENV MY_GROUP=bypanel
