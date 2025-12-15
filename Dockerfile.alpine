@@ -7,15 +7,14 @@
 # Copyright (c) 2024 Fabio Cicerchia. https://fabiocicerchia.it. MIT License
 # Repo: https://github.com/fabiocicerchia/nginx-lua
 
+ARG TARGETARCH
 ARG DISTRO=alpine
 ARG DISTRO_VER=latest
 
 #############################
 # Settings Common Variables #
 #############################
-FROM alpine:latest AS base
-
-ARG TARGETARCH
+FROM $DISTRO:$DISTRO_VER AS base
 
 ENV MY_USER=bypanel
 ENV MY_GROUP=bypanel
