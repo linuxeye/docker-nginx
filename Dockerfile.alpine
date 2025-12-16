@@ -16,7 +16,7 @@ ARG DISTRO_VER=latest
 #############################
 FROM $DISTRO:$DISTRO_VER AS base
 
-ARG ARCH=$TARGETARCH
+ARG ARCH=
 ENV ARCH=$ARCH
 
 ENV MY_USER=bypanel

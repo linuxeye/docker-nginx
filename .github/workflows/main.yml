@@ -64,3 +64,4 @@ jobs:
           build-args: |
             VER_NGINX=${{ matrix.version }}
             BUILD_DATE=${{ env.BUILD_DATE }}
+            ARCH=${{ env.TARGETARCH }}
