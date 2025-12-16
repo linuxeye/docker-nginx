@@ -62,6 +62,5 @@ jobs:
           push: true
           tags: ${{ matrix.tags }}
           build-args: |
-            ARCH=$TARGETARCH
             VER_NGINX=${{ matrix.version }}
             BUILD_DATE=${{ env.BUILD_DATE }}

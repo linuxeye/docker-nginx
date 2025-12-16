@@ -7,7 +7,6 @@
 # Copyright (c) 2025 Fabio Cicerchia. https://fabiocicerchia.it. MIT License
 # Repo: https://github.com/fabiocicerchia/nginx-lua
 
-ARG ARCH=
 ARG DISTRO=alpine
 ARG DISTRO_VER=latest
 
@@ -16,8 +15,7 @@ ARG DISTRO_VER=latest
 #############################
 FROM $DISTRO:$DISTRO_VER AS base
 
-ARG ARCH=
-ENV ARCH=$ARCH
+ARG TARGETARCH
 
 ENV MY_USER=bypanel
 ENV MY_GROUP=bypanel
@@ -325,11 +323,11 @@ ARG BUILD_DEPS_AMD64="\
         g++ \
 "
 ENV BUILD_DEPS_AMD64=$BUILD_DEPS_AMD64
-ARG BUILD_DEPS_ARM64V8="\
+ARG BUILD_DEPS_ARM64="\
         ${BUILD_DEPS_BASE} \
         gcc-aarch64-none-elf \
 "
-ENV BUILD_DEPS_ARM64V8=$BUILD_DEPS_ARM64V8
+ENV BUILD_DEPS_ARM64=$BUILD_DEPS_ARM64
 ENV BUILD_DEPS=
 
 ARG NGINX_BUILD_DEPS="\
@@ -357,12 +355,14 @@ ENV NGINX_BUILD_DEPS=$NGINX_BUILD_DEPS
 FROM base AS builder
 
 # hadolint ignore=SC2086
-RUN set -eux \
-    && eval BUILD_DEPS="\$$(echo BUILD_DEPS_${ARCH} | tr '[:lower:]' '[:upper:]')" \
-    && apk update \
-    && apk add --no-cache \
-        $BUILD_DEPS \
-        $NGINX_BUILD_DEPS
+RUN case "${TARGETARCH}" in \
+    "amd64") BUILD_DEPS="${BUILD_DEPS_AMD64}" ;; \
+    "arm64") BUILD_DEPS="${BUILD_DEPS_ARM64}" ;; \
+    *) echo "Unsupported architecture: ${TARGETARCH}"; exit 1 ;; \
+    esac && \
+    echo "Building for architecture: ${TARGETARCH}" && \
+    apk update && \
+    apk add --no-cache ${BUILD_DEPS} ${NGINX_BUILD_DEPS}
 
 COPY tpl/Makefile Makefile
 COPY tpl/patches patches
