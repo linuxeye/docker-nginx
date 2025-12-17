@@ -344,6 +344,7 @@ ARG NGINX_BUILD_DEPS="\
         openssl-dev \
         pcre-dev \
         zlib-dev \
+        gd-dev \
 # OPENRESTY PATCHES
         git \
 "
@@ -431,6 +432,8 @@ ARG PKG_DEPS="\
         unzip \
         wget \
         zlib-dev \
+        gd \
+        libxslt \
 "
 ENV PKG_DEPS=$PKG_DEPS
 
