@@ -431,6 +431,7 @@ ARG PKG_DEPS="\
         pcre-dev \
         unzip \
         wget \
+        shadow \
         zlib-dev \
         gd \
         libxslt \
