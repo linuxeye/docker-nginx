@@ -75,7 +75,7 @@ ifeq ($(EXTENDED_IMAGE), YES)
 		dep-lua-upstream-nginx-module dep-nginx-lua-prometheus dep-stream-lua-nginx-module \
 		dep-lua-openresty-misc dep-lua-resty-limit-traffic dep-lua-resty-upload \
 		dep-lua-resty-lock dep-lua-resty-balancer dep-lua-resty-string \
-		dep-lua-cjson dep-ngx_brotli dep-ngx-fancyindex dep-ngx_cache_purge
+		dep-lua-cjson dep-ngx_brotli dep-ngx-fancyindex dep-ngx_cache_purge dep-ngx_aws_auth
 endif
 
 # NGX Devel Kit
@@ -319,6 +319,8 @@ dep-ngx-fancyindex:
 dep-ngx_cache_purge:
 	git clone https://github.com/Danrancan/ngx_cache_purge_dynamic.git /ngx_cache_purge
 
+dep-ngx_aws_auth:
+	git clone https://github.com/anomalizer/ngx_aws_auth.git /ngx_aws_auth
 # ##############################################################################
 # LUAROCKS
 # ##############################################################################
