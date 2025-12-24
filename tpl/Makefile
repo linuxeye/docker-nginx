@@ -75,7 +75,7 @@ ifeq ($(EXTENDED_IMAGE), YES)
 		dep-lua-upstream-nginx-module dep-nginx-lua-prometheus dep-stream-lua-nginx-module \
 		dep-lua-openresty-misc dep-lua-resty-limit-traffic dep-lua-resty-upload \
 		dep-lua-resty-lock dep-lua-resty-balancer dep-lua-resty-string \
-		dep-lua-cjson dep-ngx_brotli dep-ngx-fancyindex dep-ngx_cache_purge dep-ngx_aws_auth
+		dep-lua-cjson dep-ngx_brotli dep-ngx-fancyindex dep-ngx_cache_purge dep-ngx_aws_auth dep-ngx-acme
 endif
 
 # NGX Devel Kit
@@ -322,7 +322,8 @@ dep-ngx_cache_purge:
 dep-ngx_aws_auth:
 	git clone https://github.com/anomalizer/ngx_aws_auth.git /ngx_aws_auth
 dep-ngx-acme:
-	git clone https://github.com/nginx/nginx-acme.git /ngx-acme
+	curl -sLo /nginx-acme.tar.gz https://github.com/nginx/nginx-acme/releases/download/v${VER_NGX_ACME}/nginx-acme-${VER_NGX_ACME}.tar.gz
+	tar -C / -xzvf /nginx-acme.tar.gz
 # ##############################################################################
 # LUAROCKS
 # ##############################################################################

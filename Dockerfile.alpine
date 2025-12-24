@@ -182,6 +182,10 @@ ENV VER_PROMETHEUS=$VER_PROMETHEUS
 ARG VER_MISC_NGINX=0.33
 ENV VER_MISC_NGINX=$VER_MISC_NGINX
 
+# https://github.com/nginx/nginx-acme
+ARG VER_NGX_ACME=0.3.1
+ENV VER_NGX_ACME=$VER_NGX_ACME
+
 # stream-lua-nginx-module
 # https://github.com/openresty/stream-lua-nginx-module
 ARG VER_OPENRESTY_STREAMLUA=af519b23ec116b3453e0ec87bdae6307e087e76d
@@ -297,7 +301,7 @@ ARG NGINX_BUILD_CONFIG="\
             --add-dynamic-module=/ngx-fancyindex \
             --add-dynamic-module=/ngx_cache_purge \
             --add-dynamic-module=/ngx_aws_auth \
-            --add-dynamic-module=/ngx-acme \
+            --add-dynamic-module=/nginx-acme-${VER_NGX_ACME} \
             --add-module=/headers-more-nginx-module-${VER_OPENRESTY_HEADERS} \
             --add-module=/lua-nginx-module-${VER_LUA_NGINX_MODULE} \
             --add-module=/lua-upstream-nginx-module-${VER_LUA_UPSTREAM} \
