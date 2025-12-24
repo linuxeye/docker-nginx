@@ -321,6 +321,8 @@ dep-ngx_cache_purge:
 
 dep-ngx_aws_auth:
 	git clone https://github.com/anomalizer/ngx_aws_auth.git /ngx_aws_auth
+dep-ngx-acme:
+	git clone https://github.com/nginx/nginx-acme.git /ngx-acme
 # ##############################################################################
 # LUAROCKS
 # ##############################################################################
