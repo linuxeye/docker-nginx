@@ -353,6 +353,7 @@ ARG NGINX_BUILD_DEPS="\
         gd-dev \
         rust \
         cargo \
+        build-base \
 # OPENRESTY PATCHES
         git \
 "
