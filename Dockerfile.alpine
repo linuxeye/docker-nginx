@@ -34,7 +34,7 @@ ENV VCS_REF=$VCS_REF
 
 # nginx
 # https://github.com/nginx/nginx/releases
-ARG VER_NGINX=1.28.1
+ARG VER_NGINX=1.28.2
 ENV VER_NGINX=$VER_NGINX
 
 # NGINX MODULES
@@ -67,7 +67,7 @@ ENV VER_GEOIP=$VER_GEOIP
 # consistently in the system. If needed to use the latest Lua version (ie >=5.4)
 # the os system package would be required, resulting in a system with multiple
 # versions available.
-ARG VER_LUAJIT=2.1-20251030
+ARG VER_LUAJIT=2.1-20260114
 ENV VER_LUAJIT=$VER_LUAJIT
 ARG LUAJIT_LIB=/usr/local/lib
 ENV LUAJIT_LIB=$LUAJIT_LIB
@@ -78,7 +78,7 @@ ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
 # lua-cjson
 # https://github.com/openresty/lua-cjson
-ARG VER_LUA_CJSON=2.1.0.15
+ARG VER_LUA_CJSON=2.1.0.16
 ENV VER_LUA_CJSON=$VER_LUA_CJSON
 
 # lua-nginx-module
