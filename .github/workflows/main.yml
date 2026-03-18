@@ -24,37 +24,35 @@ jobs:
               bypanel/nginx:stable
               bypanel/nginx:latest
           # 硬编码主线版配置
-          - version: "1.29.5"
+          - version: "1.29.6"
             tags: |
-              bypanel/nginx:1.29.5
+              bypanel/nginx:1.29.6
               bypanel/nginx:mainline
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set build date
         run: |
           echo "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-        with:
-          image: tonistiigi/binfmt:qemu-v8.1.5
+        uses: docker/setup-qemu-action@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         with:
           driver-opts: |
             network=host
 
       - name: Build and push multi-arch image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: ${{ env.DOCKERFILE_PATH }}
@@ -62,5 +60,7 @@ jobs:
           push: true
           tags: ${{ matrix.tags }}
           build-args: |
+            DISTRO=alpine
+            DISTRO_VER=latest
             VER_NGINX=${{ matrix.version }}
             BUILD_DATE=${{ env.BUILD_DATE }}
