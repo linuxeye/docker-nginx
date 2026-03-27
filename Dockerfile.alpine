@@ -34,7 +34,7 @@ ENV VCS_REF=$VCS_REF
 
 # nginx
 # https://github.com/nginx/nginx/releases
-ARG VER_NGINX=1.28.2
+ARG VER_NGINX=1.28.3
 ENV VER_NGINX=$VER_NGINX
 
 # NGINX MODULES
@@ -48,7 +48,7 @@ ENV VER_NGX_DEVEL_KIT=$VER_NGX_DEVEL_KIT
 
 # njs
 # https://github.com/nginx/njs
-ARG VER_NJS=0.9.4
+ARG VER_NJS=0.9.6
 ENV VER_NJS=$VER_NJS
 
 # geoip2
@@ -100,7 +100,7 @@ ENV LUA_LIB_DIR=$LUA_LIB_DIR
 
 # lua-rocks
 # https://luarocks.github.io/luarocks/releases/
-ARG VER_LUAROCKS=3.12.2
+ARG VER_LUAROCKS=3.13.0
 ENV VER_LUAROCKS=$VER_LUAROCKS
 
 # LUA ADDONS
@@ -134,7 +134,7 @@ ENV VER_OPENRESTY_MEMCACHED=$VER_OPENRESTY_MEMCACHED
 
 # lua-resty-mysql
 # https://github.com/openresty/lua-resty-mysql
-ARG VER_OPENRESTY_MYSQL=0.28
+ARG VER_OPENRESTY_MYSQL=0.29
 ENV VER_OPENRESTY_MYSQL=$VER_OPENRESTY_MYSQL
 
 # lua-resty-redis
