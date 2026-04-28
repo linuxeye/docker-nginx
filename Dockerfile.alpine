@@ -50,7 +50,7 @@ ENV VER_NGX_DEVEL_KIT=$VER_NGX_DEVEL_KIT
 
 # njs
 # https://github.com/nginx/njs
-ARG VER_NJS=0.9.6
+ARG VER_NJS=0.9.8
 ENV VER_NJS=$VER_NJS
 
 # geoip2
@@ -171,7 +171,7 @@ ENV VER_OPENRESTY_TABLEPOOL=$VER_OPENRESTY_TABLEPOOL
 
 # lua-upstream-nginx-module
 # https://github.com/openresty/lua-upstream-nginx-module
-ARG VER_LUA_UPSTREAM=0.07
+ARG VER_LUA_UPSTREAM=0.08
 ENV VER_LUA_UPSTREAM=$VER_LUA_UPSTREAM
 
 # nginx-lua-prometheus
@@ -185,12 +185,12 @@ ARG VER_MISC_NGINX=0.33
 ENV VER_MISC_NGINX=$VER_MISC_NGINX
 
 # https://github.com/nginx/nginx-acme
-ARG VER_NGX_ACME=0.3.1
+ARG VER_NGX_ACME=0.4.0
 ENV VER_NGX_ACME=$VER_NGX_ACME
 
 # stream-lua-nginx-module
 # https://github.com/openresty/stream-lua-nginx-module
-ARG VER_OPENRESTY_STREAMLUA=af519b23ec116b3453e0ec87bdae6307e087e76d
+ARG VER_OPENRESTY_STREAMLUA=0.0.18RC2
 ENV VER_OPENRESTY_STREAMLUA=$VER_OPENRESTY_STREAMLUA
 
 # lua-resty-limit-traffic
