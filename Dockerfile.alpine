@@ -50,7 +50,7 @@ ENV VER_NGX_DEVEL_KIT=$VER_NGX_DEVEL_KIT
 
 # njs
 # https://github.com/nginx/njs
-ARG VER_NJS=0.9.8
+ARG VER_NJS=0.9.9
 ENV VER_NJS=$VER_NJS
 
 # geoip2
@@ -69,7 +69,7 @@ ENV VER_GEOIP=$VER_GEOIP
 # consistently in the system. If needed to use the latest Lua version (ie >=5.4)
 # the os system package would be required, resulting in a system with multiple
 # versions available.
-ARG VER_LUAJIT=2.1-20260415
+ARG VER_LUAJIT=2.1-20260606
 ENV VER_LUAJIT=$VER_LUAJIT
 ARG LUAJIT_LIB=/usr/local/lib
 ENV LUAJIT_LIB=$LUAJIT_LIB
@@ -86,7 +86,7 @@ ENV VER_LUA_CJSON=$VER_LUA_CJSON
 # lua-nginx-module
 # https://github.com/openresty/lua-nginx-module
 # Production ready.
-ARG VER_LUA_NGINX_MODULE=0.10.29
+ARG VER_LUA_NGINX_MODULE=0.10.31
 ENV VER_LUA_NGINX_MODULE=$VER_LUA_NGINX_MODULE
 
 # lua-resty-core
@@ -185,12 +185,12 @@ ARG VER_MISC_NGINX=0.33
 ENV VER_MISC_NGINX=$VER_MISC_NGINX
 
 # https://github.com/nginx/nginx-acme
-ARG VER_NGX_ACME=0.4.0
+ARG VER_NGX_ACME=0.4.1
 ENV VER_NGX_ACME=$VER_NGX_ACME
 
 # stream-lua-nginx-module
 # https://github.com/openresty/stream-lua-nginx-module
-ARG VER_OPENRESTY_STREAMLUA=0.0.18RC2
+ARG VER_OPENRESTY_STREAMLUA=0.0.19rc4
 ENV VER_OPENRESTY_STREAMLUA=$VER_OPENRESTY_STREAMLUA
 
 # lua-resty-limit-traffic
@@ -215,7 +215,7 @@ ENV VER_OPENRESTY_BALANCER=$VER_OPENRESTY_BALANCER
 
 # lua-resty-string
 # https://github.com/openresty/lua-resty-string/tags
-ARG VER_OPENRESTY_STRING=0.16
+ARG VER_OPENRESTY_STRING=0.18
 ENV VER_OPENRESTY_STRING=$VER_OPENRESTY_STRING
 
 ################################################################################
