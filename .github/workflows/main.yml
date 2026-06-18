@@ -18,15 +18,15 @@ jobs:
       matrix:
         include:
           # 硬编码稳定版配置
-          - version: "1.30.2"
+          - version: "1.30.3"
             tags: |
-              bypanel/nginx:1.30.2
+              bypanel/nginx:1.30.3
               bypanel/nginx:stable
               bypanel/nginx:latest
           # 硬编码主线版配置
-          - version: "1.31.1"
+          - version: "1.31.2"
             tags: |
-              bypanel/nginx:1.31.1
+              bypanel/nginx:1.31.2
               bypanel/nginx:mainline
     steps:
       - name: Checkout code
