@@ -69,7 +69,7 @@ ENV VER_GEOIP=$VER_GEOIP
 # consistently in the system. If needed to use the latest Lua version (ie >=5.4)
 # the os system package would be required, resulting in a system with multiple
 # versions available.
-ARG VER_LUAJIT=2.1-20260717
+ARG VER_LUAJIT=2.1-20260824
 ENV VER_LUAJIT=$VER_LUAJIT
 ARG LUAJIT_LIB=/usr/local/lib
 ENV LUAJIT_LIB=$LUAJIT_LIB
@@ -190,7 +190,7 @@ ENV VER_NGX_ACME=$VER_NGX_ACME
 
 # stream-lua-nginx-module
 # https://github.com/openresty/stream-lua-nginx-module
-ARG VER_OPENRESTY_STREAMLUA=0.0.20rc1
+ARG VER_OPENRESTY_STREAMLUA=0.0.20rc2
 ENV VER_OPENRESTY_STREAMLUA=$VER_OPENRESTY_STREAMLUA
 
 # lua-resty-limit-traffic
