@@ -50,7 +50,7 @@ ENV VER_NGX_DEVEL_KIT=$VER_NGX_DEVEL_KIT
 
 # njs
 # https://github.com/nginx/njs
-ARG VER_NJS=1.0.0
+ARG VER_NJS=1.0.1
 ENV VER_NJS=$VER_NJS
 
 # geoip2
@@ -161,7 +161,7 @@ ENV VER_OPENRESTY_HEALTHCHECK=$VER_OPENRESTY_HEALTHCHECK
 
 # lua-resty-websocket
 # https://github.com/openresty/lua-resty-websocket
-ARG VER_OPENRESTY_WEBSOCKET=0.13
+ARG VER_OPENRESTY_WEBSOCKET=0.14
 ENV VER_OPENRESTY_WEBSOCKET=$VER_OPENRESTY_WEBSOCKET
 
 # lua-tablepool
@@ -215,7 +215,7 @@ ENV VER_OPENRESTY_BALANCER=$VER_OPENRESTY_BALANCER
 
 # lua-resty-string
 # https://github.com/openresty/lua-resty-string/tags
-ARG VER_OPENRESTY_STRING=0.18
+ARG VER_OPENRESTY_STRING=0.19
 ENV VER_OPENRESTY_STRING=$VER_OPENRESTY_STRING
 
 ################################################################################

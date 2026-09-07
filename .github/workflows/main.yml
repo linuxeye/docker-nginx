@@ -24,13 +24,13 @@ jobs:
               bypanel/nginx:stable
               bypanel/nginx:latest
           # 硬编码主线版配置
-          - version: "1.31.4"
+          - version: "1.31.5"
             tags: |
-              bypanel/nginx:1.31.4
+              bypanel/nginx:1.31.5
               bypanel/nginx:mainline
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set build date
         run: |
