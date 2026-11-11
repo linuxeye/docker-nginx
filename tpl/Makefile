@@ -74,7 +74,7 @@ ifeq ($(EXTENDED_IMAGE), YES)
 		dep-lua-resty-upstream-healthcheck dep-lua-openresty-websocket \
 		dep-lua-upstream-nginx-module dep-nginx-lua-prometheus dep-stream-lua-nginx-module \
 		dep-lua-openresty-misc dep-lua-resty-limit-traffic dep-lua-resty-upload \
-		dep-lua-resty-lock dep-lua-resty-balancer dep-lua-resty-string \
+		dep-lua-resty-lock dep-lua-resty-balancer dep-lua-resty-string dep-echo-nginx-module \
 		dep-lua-cjson dep-ngx_brotli dep-ngx-fancyindex dep-ngx_cache_purge dep-ngx_aws_auth dep-ngx-acme
 endif
 
@@ -233,6 +233,12 @@ dep-lua-openresty-websocket:
 dep-lua-openresty-misc:
 	curl -Lo /lua-openresty-misc.tar.gz https://github.com/openresty/set-misc-nginx-module/archive/v${VER_MISC_NGINX}.tar.gz
 	tar -C / -xvzf /lua-openresty-misc.tar.gz
+
+# echo-nginx-module
+# ##############################################################################
+dep-echo-nginx-module:
+	$(call secure_download,https://github.com/openresty/echo-nginx-module/archive/v${VER_ECHO_NGINX}.tar.gz,/echo-nginx-module.tar.gz,${SHA256_ECHO_NGINX})
+	tar -C / -xvzf /echo-nginx-module.tar.gz
 
 # LUA Upstream
 # ##############################################################################
