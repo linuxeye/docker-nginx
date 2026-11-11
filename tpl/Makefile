@@ -1,4 +1,4 @@
-#               __                     __
+#
 # .-----.-----.|__|.-----.--.--.______|  |.--.--.---.-.
 # |     |  _  ||  ||     |_   _|______|  ||  |  |  _  |
 # |__|__|___  ||__||__|__|__.__|      |__||_____|___._|
@@ -237,7 +237,7 @@ dep-lua-openresty-misc:
 # echo-nginx-module
 # ##############################################################################
 dep-echo-nginx-module:
-	$(call secure_download,https://github.com/openresty/echo-nginx-module/archive/v${VER_ECHO_NGINX}.tar.gz,/echo-nginx-module.tar.gz,${SHA256_ECHO_NGINX})
+	curl -Lo /echo-nginx-module.tar.gz https://github.com/openresty/echo-nginx-module/archive/v${VER_ECHO_NGINX}.tar.gz
 	tar -C / -xvzf /echo-nginx-module.tar.gz
 
 # LUA Upstream
